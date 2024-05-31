@@ -44,11 +44,13 @@
             <!-- Kelompok Ilmiah Remaja -->
             <div class="pa-10 ml-10  " style="width: 450px; height: 500px; background-color: rgb(255 255 255 / 40%); border-radius: 10%;">
                 <h1 style="font-size: 40px;" class="text-center">Program Kerja</h1>
-                <v-virtual-scroll :items="items" height="500">
-                    <template v-slot:default="{ itemku }">
-                        Virtual Item {{ itemku }}
-                    </template>
-                </v-virtual-scroll>
+                <div style="display: flex; height: 320px;" class="mt-5 text-center">
+                    <v-virtual-scroll :items="itemku" class="my-4">
+                        <template v-slot:default="{ item }">
+                            <li>Program Kerja {{ item }}</li> 
+                        </template>
+                    </v-virtual-scroll>
+                </div>
                 <!-- <ul style="font-size: 20px; text-align: center;" class="mt-4">
                     <li>Lorem ipsum dolor sit amet.</li>
                     <li class="my-4">Lorem ipsum dolor sit amet.</li>
@@ -63,8 +65,8 @@
                 <!-- spacer -->
             </div>
             <div class="pa-10" style="width: 450px; height: 500px; background-color: rgb(255 255 255 / 40%);  border-radius: 10%;">
-                <h1 style="font-size: 40px;" class="text-center">Program Kerja</h1>
-                <ul style="font-size: 20px; text-align: center;" class="mt-4">
+                <h1 style="font-size: 40px;" class="text-center">Prestasi</h1>
+                <!-- <ul style="font-size: 20px; text-align: center;" class="mt-4">
                     <li>Lorem ipsum dolor sit amet.</li>
                     <li class="my-4">Lorem ipsum dolor sit amet.</li>
                     <li>Lorem ipsum dolor sit amet.</li>
@@ -72,7 +74,14 @@
                     <li>Lorem ipsum dolor sit amet.</li>
                     <li class="my-4">Lorem ipsum dolor sit amet.</li>
                     <li>Lorem ipsum dolor sit amet.</li>
-                </ul>
+                </ul> -->
+                <div style="display: flex; height: 320px;" class="mt-5 text-center">
+                    <v-virtual-scroll :items="itemku" class="my-4">
+                        <template v-slot:default="{ item }">
+                            <li>Prestasi {{ item }}</li> 
+                        </template>
+                    </v-virtual-scroll>
+                </div>
             </div>
         </v-container>
     </div>  

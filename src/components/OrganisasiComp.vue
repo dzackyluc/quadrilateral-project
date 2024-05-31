@@ -44,7 +44,12 @@
             <!-- Kelompok Ilmiah Remaja -->
             <div class="pa-10 ml-10  " style="width: 450px; height: 500px; background-color: rgb(255 255 255 / 40%); border-radius: 10%;">
                 <h1 style="font-size: 40px;" class="text-center">Program Kerja</h1>
-                <ul style="font-size: 20px; text-align: center;" class="mt-4">
+                <v-virtual-scroll :items="items" height="500">
+                    <template v-slot:default="{ itemku }">
+                        Virtual Item {{ itemku }}
+                    </template>
+                </v-virtual-scroll>
+                <!-- <ul style="font-size: 20px; text-align: center;" class="mt-4">
                     <li>Lorem ipsum dolor sit amet.</li>
                     <li class="my-4">Lorem ipsum dolor sit amet.</li>
                     <li>Lorem ipsum dolor sit amet.</li>
@@ -52,7 +57,7 @@
                     <li>Lorem ipsum dolor sit amet.</li>
                     <li class="my-4">Lorem ipsum dolor sit amet.</li>
                     <li>Lorem ipsum dolor sit amet.</li>
-                </ul>
+                </ul> -->
             </div>
             <div class="mx-12">
                 <!-- spacer -->
@@ -144,6 +149,25 @@
             </div>
         </v-container>
     </div>
+
+    <!-- Quotes -->
+    <div class="quotes pa-10">
+        <v-container>
+            <div class="desain d-flex justify-center">
+                <div style="background-color: #30475E; width: 100px; height: 40px; border-radius: 18%;"></div>
+                <div style="background-color: #30475E; width: 500px ; height: 40px; border-radius: 10%; margin-left: 30px; margin-right: 60px;"></div>
+                <div style="background-color: #30475E; width: 200px; height: 40px; border-radius: 18%;"></div>
+            </div>
+            <div class="quote justify-center mt-10">
+                
+                <h3 class="text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M6.848 2.47a1 1 0 0 1-.318 1.378A7.3 7.3 0 0 0 3.75 7.01A3 3 0 1 1 1 10v-.027a4 4 0 0 1 .01-.232c.009-.15.027-.36.062-.618c.07-.513.207-1.22.484-2.014c.552-1.59 1.67-3.555 3.914-4.957a1 1 0 0 1 1.378.318m7 0a1 1 0 0 1-.318 1.378a7.3 7.3 0 0 0-2.78 3.162A3 3 0 1 1 8 10v-.027a4 4 0 0 1 .01-.232c.009-.15.027-.36.062-.618c.07-.513.207-1.22.484-2.014c.552-1.59 1.67-3.555 3.914-4.957a1 1 0 0 1 1.378.318"/></svg> 
+                    Wisdom is the right use of knowledge. To know is not to be wise. Many men know a great deal, and are all the greater fools for it. There is no fool so great a fool as a knowing fool. But to know how to use knowledge is to have wisdom.
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20"><path fill="currentColor" d="M5.315 3.401c-1.61 0-2.916 1.343-2.916 3c0 1.656 1.306 3 2.916 3c2.915 0 .972 5.799-2.916 5.799v1.4c6.939.001 9.658-13.199 2.916-13.199m8.4 0c-1.609 0-2.915 1.343-2.915 3c0 1.656 1.306 3 2.915 3c2.916 0 .973 5.799-2.915 5.799v1.4c6.938.001 9.657-13.199 2.915-13.199"/></svg></h3>
+                
+            </div>
+        </v-container>
+    </div>
 </template>
 
 
@@ -163,6 +187,8 @@
                     { src: 'https://cdn0-production-images-kly.akamaized.net/iU9pyWLegfhnryegoIdokQ4pJSA=/800x1066/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4130911/original/089981300_1661091903-Mencuri_Raden_Saleh_2.jpg', alt: 'Image 6', link: '/plane2' },
                     { src: 'https://images5.alphacoders.com/698/698793.png', alt: 'Image 7', link: '/plane2' },
                 ],
+
+                itemku: Array.from({ length: 1000 }, (k, v) => v + 1),
                 bcitems: [
                     { title: 'Home', disabled: false, href: '/dashboard' },
                     { title: 'Kegiatan', disabled: true },

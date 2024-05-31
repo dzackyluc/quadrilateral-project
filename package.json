@@ -1,0 +1,46 @@
+{
+  "name": "quadrilateral-project",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --fix --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "@mdi/font": "7.0.96",
+    "@splidejs/vue-splide": "^0.6.12",
+    "@tiptap/core": "^2.3.1",
+    "@tiptap/extension-image": "^2.3.1",
+    "@tiptap/extension-text-align": "^2.3.1",
+    "@tiptap/extension-underline": "^2.3.1",
+    "@tiptap/starter-kit": "^2.3.1",
+    "@tiptap/vue-3": "^2.3.1",
+    "axios": "^1.6.8",
+    "core-js": "^3.34.0",
+    "roboto-fontface": "*",
+    "tiptap-extension-resize-image": "^1.1.4",
+    "vue": "^3.4.0",
+    "vue-axios": "^3.5.2",
+    "vue-sweetalert2": "^5.0.5",
+    "vue3-carousel-3d": "^1.0.4",
+    "vuetify": "^3.6.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-vue": "^9.22.0",
+    "sass": "^1.71.1",
+    "unplugin-fonts": "^1.1.1",
+    "unplugin-vue-components": "^0.26.0",
+    "unplugin-vue-router": "^0.8.4",
+    "vite": "^5.1.5",
+    "vite-plugin-vuetify": "^2.0.3",
+    "vue-router": "^4.3.0"
+  }
+}

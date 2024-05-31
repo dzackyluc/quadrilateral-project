@@ -14,6 +14,7 @@ const RegisterPage = () => import('@/pages/registerPage.vue');
 const EditPage = () => import('@/pages/editPage.vue');
 const CreatePage = () => import('@/pages/createPage.vue');
 const ForgotPasswordPage = () => import('@/pages/ForgotPasswordPage');
+const OrganisasiPage = () => import('@/pages/organisasiPage.vue');
 
 // Router
 const router = createRouter({
@@ -110,6 +111,15 @@ const router = createRouter({
         }
       ]
     },
+    {
+      path: '/organisasi',
+      children: [
+        {
+          path: '',
+          component: OrganisasiPage,
+        }
+      ]
+    }
   ]
 });
 

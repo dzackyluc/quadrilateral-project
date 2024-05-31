@@ -57,7 +57,7 @@ export default {
             loading: false,
             pagination: {
                 sortBy: 'date',
-                descending: false,
+                descending: true,
             },
             totalPosts: 0,
         };

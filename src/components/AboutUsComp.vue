@@ -48,7 +48,7 @@
                 <v-row>
                     <v-col cols="12">
                         <v-card-text class="text-center">
-                            <h1 class="font-weight-bold"><span style="color: red;">Our</span> Leaders</h1>
+                            <div class="font-weight-bold text-h3"><span style="color: red;">Direktori</span> <span style="color: #111F4D;">Kepemimpinan</span></div>
                         </v-card-text>
                     </v-col>
                 </v-row>

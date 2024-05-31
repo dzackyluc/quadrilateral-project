@@ -1,11 +1,11 @@
 <template>
     <NavBarVue />
-    <RadiolisaCompVue />
+    <RadioPageCompVue />
     <FooterBarVue />
 </template>
 
 <script setup>
 import NavBarVue from '@/components/NavBar.vue';
-import RadiolisaCompVue from '@/components/RadiolisaComp.vue';
+import RadioPageCompVue from '@/components/RadioPageComp.vue';
 import FooterBarVue from '@/components/FooterBar.vue';
 </script>

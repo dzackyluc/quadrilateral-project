@@ -47,10 +47,10 @@
 </template>
 
 <script setup>
-const DashboardTabs = () => import('./Dashboard Component/DashboardTabs.vue');
-const PostsTabs = () => import('./Dashboard Component/PostsTabs.vue');
-const MemberTabs = () => import('./Dashboard Component/MemberTabs.vue');
-const AccountTabs = () => import('./Dashboard Component/AccountTabs.vue');
+import AccountTabs from './Dashboard Component/AccountTabs.vue';
+import DashboardTabs from './Dashboard Component/DashboardTabs.vue';
+import MemberTabs from './Dashboard Component/MemberTabs.vue';
+import PostsTabs from './Dashboard Component/PostsTabs.vue';
 </script>
 
 <script>

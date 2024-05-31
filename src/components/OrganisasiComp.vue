@@ -51,30 +51,13 @@
                         </template>
                     </v-virtual-scroll>
                 </div>
-                <!-- <ul style="font-size: 20px; text-align: center;" class="mt-4">
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li class="my-4">Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li class="my-4">Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li class="my-4">Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                </ul> -->
+
             </div>
             <div class="mx-12">
                 <!-- spacer -->
             </div>
             <div class="pa-10" style="width: 450px; height: 500px; background-color: rgb(255 255 255 / 40%);  border-radius: 10%;">
                 <h1 style="font-size: 40px;" class="text-center">Prestasi</h1>
-                <!-- <ul style="font-size: 20px; text-align: center;" class="mt-4">
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li class="my-4">Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li class="my-4">Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                    <li class="my-4">Lorem ipsum dolor sit amet.</li>
-                    <li>Lorem ipsum dolor sit amet.</li>
-                </ul> -->
                 <div style="display: flex; height: 320px;" class="mt-5 text-center">
                     <v-virtual-scroll :items="itemku" class="my-4">
                         <template v-slot:default="{ item }">

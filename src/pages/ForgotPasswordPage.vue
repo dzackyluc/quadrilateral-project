@@ -1,7 +1,9 @@
 <template>
-    <Forgot />
+    <NavBar />
+    <ForgotComp />
 </template>
 
-<script>
-import Forgot from "@/components/forgotComp.vue"
+<script setup>
+import NavBar from '@/components/NavBar.vue';
+import ForgotComp from '@/components/ForgotComp.vue';
 </script>

@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 // Pages
 const IndexPage = () => import('@/pages/indexPage.vue');
 const LoginPage = () => import('@/pages/loginPage.vue');
+const ResetPage = () => import('@/pages/resetPage.vue');
 const NewsPage = () => import('@/pages/newsPage.vue');
 const DashboardPage = () => import('@/pages/dashboardPage.vue');
 const FullNewsPage = () => import('@/pages/fullNewsPage.vue');
@@ -13,7 +14,7 @@ const AboutUsPage = () => import('@/pages/aboutusPage.vue');
 const RegisterPage = () => import('@/pages/registerPage.vue');
 const EditPage = () => import('@/pages/editPage.vue');
 const CreatePage = () => import('@/pages/createPage.vue');
-const ForgotPasswordPage = () => import('@/pages/ForgotPasswordPage');
+const ForgotPage = () => import('@/pages/forgotPage');
 const OrganisasiPage = () => import('@/pages/organisasiPage.vue');
 
 // Router
@@ -41,11 +42,20 @@ const router = createRouter({
       ]
     },
     {
-      path: '/forget',
+      path: '/forgot',
       children: [
         {
           path: '',
-          component: ForgotPasswordPage
+          component: ForgotPage
+        }
+      ]
+    },
+    {
+      path: '/reset',
+      children: [
+        {
+          path: '',
+          component: ResetPage
         }
       ]
     },

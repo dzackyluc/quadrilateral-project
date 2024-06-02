@@ -14,7 +14,7 @@
             <v-row>
                 <v-col class="d-flex">
                     <v-sheet :height="40" :width="16" class="pa-2 ma-2" color="error"></v-sheet>
-                    <h1 class="d-flex justify-center align-center">Radio</h1>
+                    <h1 class="d-flex justify-center align-center">Radiolisa</h1>
                 </v-col>
             </v-row>
             <v-row v-if="response" class="justify-center">

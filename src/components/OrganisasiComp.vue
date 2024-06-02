@@ -145,11 +145,17 @@
     <!-- Quotes -->
     <div class="quotes pa-10">
         <v-container>
-            <div class="desain d-flex justify-center">
-                <div style="background-color: #30475E; width: 100px; height: 40px; border-radius: 18%;"></div>
-                <div style="background-color: #30475E; width: 500px ; height: 40px; border-radius: 10%; margin-left: 30px; margin-right: 60px;"></div>
-                <div style="background-color: #30475E; width: 200px; height: 40px; border-radius: 18%;"></div>
-            </div>
+            <v-row no-gutters class="container-line d-flex justify-center align-center">
+                <v-col cols="1">
+                    <v-divider :thickness="10" class="decorative-line border-opacity-100"></v-divider>
+                </v-col>
+                <v-col cols="3">
+                    <v-divider :thickness="10" class="decorative-line border-opacity-100"></v-divider>
+                </v-col>
+                <v-col cols="1">
+                    <v-divider :thickness="10" class="decorative-line border-opacity-100"></v-divider>
+                </v-col>
+            </v-row>
             <div class="quote justify-center mt-10">
                 
                 <h3 class="text-center">
@@ -202,3 +208,19 @@
     },
     }
 </script>
+<style>
+.border-opacity-100 {
+    opacity: 1; /* Opacity 100% */
+    color: #30475E;
+    }
+
+    .decorative-line {
+    border-radius: 10px; /* Border radius */
+    margin: 0 5px; /* Menambahkan jarak horizontal antara garis */
+    }
+
+    .decorative-line.v-divider {
+    padding: 0; /* Menghilangkan margin default dari v-divider */
+    }
+
+</style>

@@ -3,28 +3,37 @@
         <v-container class="d-flex justify-center align-center">
             <v-row>
                 <v-col class="d-flex justify-center align-center" cols="6">
-                    <v-card class="rounded-lg padding-form" width="30rem" elevated>
-                        <v-card-title class="forgot text-h4 text-left">Forgot</v-card-title>
+                    <v-card class="padding-form rounded-lg" width="30rem" elevated>
+                        <v-card-title class="reset text-h4 text-left">Reset</v-card-title>
                         <v-card-title class="password text-h3 text-left">PASSWORD?</v-card-title>
-                        <v-card-text >
+                        <v-card-text>
                             <v-form ref="form" v-model="valid" lazy-validation>
-                                <h2>Email:</h2>
-                                <v-text-field class="padding-btn"
-                                    v-model="email"
-                                    :rules="emailRules"
-                                    label="Email"
+                                <h2>New Password:</h2>
+                                <v-text-field
+                                    v-model="newPassword"
+                                    :rules="passwordRules"
+                                    label="New Password"
                                     required
+                                    type="password"
+                                ></v-text-field>
+                                <h2>Confirm Password:</h2>
+                                <v-text-field class="padding-btn"
+                                    v-model="confirmPassword"
+                                    :rules="confirmPasswordRules"
+                                    label="Confirm Password"
+                                    required
+                                    type="password"
                                 ></v-text-field>
                                 <div class="d-flex justify-center my-5">
-                                    <v-btn
+                                    <v-btn 
                                         :loading="loading"
                                         block
                                         rounded="xl"
                                         color="#111F4D"
                                         :disabled="!valid"
-                                        @click="forgot"
+                                        @click="resetPassword"
                                     >
-                                        Send Login Link
+                                        Change Password
                                     </v-btn>
                                 </div>
                             </v-form>
@@ -44,7 +53,7 @@
                     <v-row>
                         <v-col class="d-flex justify-center align-center" cols="12">
                             <v-img
-                            src="../assets/forgot.png"
+                            src="../assets/reset.png"
                             height="30rem"
                             width="30rem"
                             ></v-img>
@@ -53,59 +62,54 @@
                 </v-col>
             </v-row>
         </v-container>
-
-        <!-- Modal untuk pesan sukses -->
-        <v-dialog v-model="dialog" max-width="500">
-            <v-card>
-                <v-card-title class="headline">Email Sent</v-card-title>
-                <v-card-text>Kami mengirimkan email ke {{ email }} dengan link untuk mendapatkan akunmu kembali.</v-card-text>
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="primary" @click="dialog = false">OK</v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog>
     </div>
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
     data() {
         return {
-            email: '',
+            newPassword: '',
+            confirmPassword: '',
             loading: false,
             valid: false,
-            dialog: false,
-            emailRules: [
-                v => !!v || 'Email is required',
-                v => /.+@.+\..+/.test(v) || 'Email must be valid',
+            passwordRules: [
+                v => !!v || 'Password is required',
+                v => v.length >= 8 || 'Password must be at least 8 characters',
             ],
-        };
+            confirmPasswordRules: [
+                v => !!v || 'Confirm Password is required',
+                v => v === this.newPassword || 'Passwords do not match',
+            ],
+        }
     },
     methods: {
-        async forgot() {
+        async resetPassword() {
             if (!this.valid) {
                 return;
             }
             this.loading = true;
             try {
-                const response = await axios.post('/forgot', {
-                    email: this.email,
+                const response = await this.$axios.post('/reset-password', {
+                    password: this.newPassword,
                 });
-                console.log('Email sent successfully');
-                this.$set(this, 'dialog', true); // Ensure reactivity
-                console.log('Dialog state:', this.dialog); // Check if dialog state changes
+                this.$router.push('/login');
             } catch (error) {
-                console.error('Error sending email:', error);
-                // Provide feedback to user, e.g., through a notification
+                console.error('Error resetting password:', error);
             } finally {
                 this.loading = false;
             }
         },
     },
-};
+    watch: {
+        newPassword(val) {
+            this.$refs.form.validate();
+        },
+        confirmPassword(val) {
+            this.$refs.form.validate();
+        }
+    }
+}
 </script>
 
 <style scoped>
@@ -121,7 +125,7 @@ export default {
     text-align: center;
 }
 
-.forgot {
+.reset {
     font-weight: bold;
     margin: 0; /* Menghapus semua margin */
     padding-bottom: 0; /* Menghapus semua padding */
@@ -135,10 +139,10 @@ export default {
 }
 
 .padding-form {
- padding: 25px;
+ padding: 15px;
 }
 
 .padding-btn{
-    padding-bottom: 100px;
+    padding-bottom: 80px;
 }
 </style>

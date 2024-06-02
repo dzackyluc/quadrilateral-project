@@ -3,7 +3,7 @@
         <v-container class="d-flex justify-center align-center">
             <v-row>
                 <v-col class="d-flex justify-center align-center" cols="6">
-                    <v-card class="rounded-lg" width="30rem" elevated>
+                    <v-card class="padding form rounded-lg" width="30rem" elevated>
                         <v-card-title class="text-h4 text-center">REGISTER</v-card-title>
                         <v-divider class="mx-auto" length="300" opacity="100%" thickness="3"></v-divider>
                         <v-card-text>
@@ -130,5 +130,9 @@ export default {
 
 .text-center {
     text-align: center;
+}
+
+.padding-form {
+ padding: 25px;
 }
 </style>

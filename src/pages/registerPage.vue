@@ -5,5 +5,5 @@
 
 <script setup>
 import RegisterCompVue from '@/components/RegisterComp.vue';
-import NavBar from '@/components/NavBar.vue';
+import NavBar from '@/components/NavBarLogin.vue';
 </script>

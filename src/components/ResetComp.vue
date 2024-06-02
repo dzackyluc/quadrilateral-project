@@ -134,15 +134,15 @@ export default {
 .password {
   margin: 0; /* Menghapus semua margin */
   padding-top: 0; /* Menghapus semua padding */
-  padding-bottom: 100px;
+  padding-bottom: 70px;
   font-weight: bold;
 }
 
 .padding-form {
- padding: 15px;
+ padding: 25px;
 }
 
 .padding-btn{
-    padding-bottom: 80px;
+    padding-bottom: 70px;
 }
 </style>

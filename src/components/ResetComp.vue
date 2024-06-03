@@ -134,7 +134,7 @@ export default {
 .password {
   margin: 0; /* Menghapus semua margin */
   padding-top: 0; /* Menghapus semua padding */
-  padding-bottom: 70px;
+  padding-bottom: 60px;
   font-weight: bold;
 }
 
@@ -143,6 +143,6 @@ export default {
 }
 
 .padding-btn{
-    padding-bottom: 70px;
+    padding-bottom: 60px;
 }
 </style>

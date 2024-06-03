@@ -36,6 +36,7 @@
                         <div class="sub-category">{{ response.subCategory }}</div>
                         <h2 class="title">{{ response.title }}</h2>
                         <div v-html="response.description" class="video-description"></div>
+                        <div class="upload-time">{{ response.uploadTime }}</div>
                     </div>
                 </v-col>
             </v-row>
@@ -96,53 +97,34 @@
 </template>
 
 <script>
-  export default {
+   export default {
     data() {
         return {
             bcitems: [
                 { title: 'Home', disabled: false, href: '/dashboard' },
                 { title: 'Radio', disabled: true },
             ],
-            response: {
-                videoId: 'dQw4w9WgXcQ', // Ganti dengan ID video YouTube yang sesuai
-                subCategory: 'Radiolisa',
-                title: 'Judul Video',
-                description: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at nibh non ipsum tincidunt vulputate sit amet non dui. Sed vestibulum lorem nec nulla ultricies, vitae tincidunt lorem aliquet. Integer hendrerit libero a lorem tincidunt, quis commodo nulla dapibus. Morbi accumsan tristique justo, id fringilla mi.</p>',
-            },
+            response: null,
             previousVideos: [
                 {
-                    videoId: 'kxopViU98Xo', // ID video sebelumnya
-                    uploadTime: 'Diupload 2 jam yang lalu',
+                    videoId: 'dQw4w9WgXcQ', // ID video sebelumnya
+                    uploadTime: '27 September 2024',
                     subCategory: 'Radiolisa',
-                    title: 'Judul Video Sebelumnya 2',
+                    title: 'Judul Video 1',
                     description: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at nibh non ipsum tincidunt vulputate sit amet non dui. Sed vestibulum lorem nec nulla ultricies, vitae tincidunt lorem aliquet. Integer hendrerit libero a lorem tincidunt, quis commodo nulla dapibus. Morbi accumsan tristique justo, id fringilla mi.</p>',
                 },
                 {
                     videoId: 'kxopViU98Xo', // ID video sebelumnya
-                    uploadTime: 'Diupload 2 jam yang lalu',
+                    uploadTime: '28 Mei 2024',
                     subCategory: 'Radiolisa',
-                    title: 'Judul Video Sebelumnya 2',
+                    title: 'Judul Video 2',
                     description: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at nibh non ipsum tincidunt vulputate sit amet non dui. Sed vestibulum lorem nec nulla ultricies, vitae tincidunt lorem aliquet. Integer hendrerit libero a lorem tincidunt, quis commodo nulla dapibus. Morbi accumsan tristique justo, id fringilla mi.</p>',
                 },
                 {
                     videoId: 'kxopViU98Xo', // ID video sebelumnya
-                    uploadTime: 'Diupload 3 jam yang lalu',
-                    subCategory: 'Streaming Radiolisa',
-                    title: 'Judul Video Sebelumnya 3',
-                    description: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at nibh non ipsum tincidunt vulputate sit amet non dui. Sed vestibulum lorem nec nulla ultricies, vitae tincidunt lorem aliquet. Integer hendrerit libero a lorem tincidunt, quis commodo nulla dapibus. Morbi accumsan tristique justo, id fringilla mi.</p>',
-                },
-                {
-                    videoId: 'kxopViU98Xo', // ID video sebelumnya
-                    uploadTime: 'Diupload 4 jam yang lalu',
-                    subCategory: 'Streaming Radiolisa',
-                    title: 'Judul Video Sebelumnya 4',
-                    description: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at nibh non ipsum tincidunt vulputate sit amet non dui. Sed vestibulum lorem nec nulla ultricies, vitae tincidunt lorem aliquet. Integer hendrerit libero a lorem tincidunt, quis commodo nulla dapibus. Morbi accumsan tristique justo, id fringilla mi.</p>',
-                },
-                {
-                    videoId: 'kxopViU98Xo', // ID video sebelumnya
-                    uploadTime: 'Diupload 4 jam yang lalu',
-                    subCategory: 'Streaming Radiolisa',
-                    title: 'Judul Video Sebelumnya 4',
+                    uploadTime: '1 Desember 2023',
+                    subCategory: 'Radiolisa',
+                    title: 'Judul Video 3',
                     description: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at nibh non ipsum tincidunt vulputate sit amet non dui. Sed vestibulum lorem nec nulla ultricies, vitae tincidunt lorem aliquet. Integer hendrerit libero a lorem tincidunt, quis commodo nulla dapibus. Morbi accumsan tristique justo, id fringilla mi.</p>',
                 },
             ],
@@ -151,15 +133,23 @@
         };
     },
     mounted() {
-        this.previousVideosToShow = this.previousVideos.slice(0, 3);
-        if (this.previousVideos.length <= 3) {
+        if (this.previousVideos.length > 0) {
+        this.response = this.previousVideos[0]; // Video terakhir di-upload
+        this.previousVideosToShow = this.previousVideos.slice(1, 4); // Video sebelumnya
+        if (this.previousVideosToShow.length >= this.previousVideos.length - 1) {
+            this.showMoreButton = false;
+        }
+        } else {
+        this.response = null;
+        this.previousVideosToShow = [];
         this.showMoreButton = false;
         }
     },
     methods: {
         showMoreVideos() {
-        this.previousVideosToShow = [...this.previousVideosToShow, ...this.previousVideos.slice(this.previousVideosToShow.length, this.previousVideosToShow.length + 6)];
-        if (this.previousVideosToShow.length >= this.previousVideos.length) {
+        const start = this.previousVideosToShow.length + 1;
+        this.previousVideosToShow = [...this.previousVideosToShow, ...this.previousVideos.slice(start, start + 6)];
+        if (this.previousVideosToShow.length >= this.previousVideos.length - 1) {
             this.showMoreButton = false;
         }
         }
@@ -189,6 +179,12 @@
     .video-description {
     margin-top: 14px; /* Jarak antara judul dan deskripsi */
     }
+
+    .upload-time{
+    padding-top: 10px; 
+    color: #6b6b6b;   
+    }
+
     .v-col-text {
     display: flex;
     justify-content: center;

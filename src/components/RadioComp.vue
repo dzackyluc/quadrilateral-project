@@ -108,7 +108,7 @@
 </template>
 
 <script>
-  export default {
+   export default {
     data() {
         return {
             bcitems: [
@@ -167,6 +167,12 @@
     .video-description {
     margin-top: 14px; /* Jarak antara judul dan deskripsi */
     }
+
+    .upload-time{
+    padding-top: 10px; 
+    color: #6b6b6b;   
+    }
+
     .v-col-text {
     display: flex;
     justify-content: center;

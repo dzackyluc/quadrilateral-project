@@ -16,6 +16,7 @@ const EditPage = () => import('@/pages/editPage.vue');
 const CreatePage = () => import('@/pages/createPage.vue');
 const ForgotPage = () => import('@/pages/forgotPage');
 const OrganisasiPage = () => import('@/pages/organisasiPage.vue');
+const SearchPage = () => import('@/pages/searchPage.vue');
 
 // Router
 const router = createRouter({
@@ -71,6 +72,11 @@ const router = createRouter({
           component: FullNewsPage,
           props: (route) => ({ newsId: route.query.newsId }),
         },
+        {
+          path: 'search',
+          component: SearchPage,
+          props: (route) => ({ search: route.query.q }),
+        }
       ]
     },
     {
@@ -134,40 +140,40 @@ const router = createRouter({
 });
 
 // Router Guard
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!localStorage.getItem('jwt')) {
-      next('/login');
-    } else {
-      const jwt = localStorage.getItem('jwt');
-      const decodedJwt = decodeJwt(jwt);
-      localStorage.setItem('user', decodedJwt.sub);
-      const expiration = decodedJwt.exp;
-      const currentTime = Math.floor(Date.now() / 1000);
-      if (currentTime > expiration) {
-        localStorage.removeItem('jwt');
-        next('/login');
-      } else {
-        next();
-      }
-    }
-  } else if (to.path === '/login' && localStorage.getItem('jwt')) {
-    next('/dashboard');
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.requiresAuth)) {
+//     if (!localStorage.getItem('jwt')) {
+//       next('/login');
+//     } else {
+//       const jwt = localStorage.getItem('jwt');
+//       const decodedJwt = decodeJwt(jwt);
+//       localStorage.setItem('user', decodedJwt.sub);
+//       const expiration = decodedJwt.exp;
+//       const currentTime = Math.floor(Date.now() / 1000);
+//       if (currentTime > expiration) {
+//         localStorage.removeItem('jwt');
+//         next('/login');
+//       } else {
+//         next();
+//       }
+//     }
+//   } else if (to.path === '/login' && localStorage.getItem('jwt')) {
+//     next('/dashboard');
+//   } else {
+//     next();
+//   }
+// });
 
 // Fungsi untuk decode JWT token yang ada di local storage
-function decodeJwt(jwt) {
-  const base64Url = jwt.split('.')[1];
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
+// function decodeJwt(jwt) {
+//   const base64Url = jwt.split('.')[1];
+//   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+//   const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+//     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+//   }).join(''));
 
-  return JSON.parse(jsonPayload);
-}
+//   return JSON.parse(jsonPayload);
+// }
 
 // Export
 export default router;

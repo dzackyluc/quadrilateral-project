@@ -70,7 +70,7 @@ export default {
 
     methods: {
         searchData() {
-            this.$router.push({ path: '/search', query: { q: this.search } });
+            this.$router.push({ path: '/news/search', query: { q: this.search } });
         },
     }
 };

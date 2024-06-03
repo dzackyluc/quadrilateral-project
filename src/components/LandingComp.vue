@@ -229,91 +229,37 @@
             <v-row>
                 <v-col cols="6">
                     <v-card
-                        :href="'/news/read?newsId=' + items2[0].id"
                         class="align-end"
-                        link
                         flat
-                        v-if="items2[0]"
+                        v-if="radio"
                     >
-                        <v-img
-                            :src="'http://localhost:8080' + items2[0].imageUrl"
-                            height="20rem"
-                            cover
-                        >
-                        </v-img>
-                        <v-card-title class="font-weight-bold text-h5 text-wrap">{{ items2[0].title }}</v-card-title>
+                        <iframe
+                        :src="'https://www.youtube.com/embed/' + radio[0].id.videoId"
+                        height="320rem"
+                        width="100%"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        ></iframe>
+                        <v-card-title class="font-weight-bold text-h5 text-wrap">{{ radio[0].snippet.title }}</v-card-title>
                     </v-card>
                 </v-col>
                 <v-col cols="6">
-                    <v-row>
-                        <v-col cols="6">
+                    <v-row v-if="radio">
+                        <v-col v-for="(item,index) in radio.slice(1,5)" :key="index" cols="6">
                             <v-card
-                                :href="'/news/read?newsId=' + items2[1].id"
                                 class="align-end"
-                                link
                                 flat
-                                v-if="items2[1]"
                             >
-                                <v-img
-                                    :src="'http://localhost:8080' + items2[1].imageUrl"
-                                    height="10rem"
-                                    cover
-                                >
-                                </v-img>
-                                <v-card-title class="text-subtitle-1 font-weight-bold text-wrap">{{ items2[1].title }}</v-card-title>
-                            </v-card>
-                        </v-col>
-                        <v-col cols="6">
-                            <v-card
-                                :href="'/news/read?newsId=' + items2[2].id"
-                                class="align-end"
-                                link
-                                flat
-                                v-if="items2[2]"
-                            >
-                                <v-img
-                                    :src="'http://localhost:8080' + items2[2].imageUrl"
-                                    height="10rem"
-                                    cover
-                                >
-                                </v-img>
-                                <v-card-title class="text-subtitle-1 font-weight-bold text-wrap">{{ items2[2].title }}</v-card-title>
-                            </v-card>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="6">
-                            <v-card
-                                :href="'/news/read?newsId=' + items2[3].id"
-                                class="align-end"
-                                link
-                                flat
-                                v-if="items2[3]"
-                            >
-                                <v-img
-                                    :src="'http://localhost:8080' + items2[3].imageUrl"
-                                    height="10rem"
-                                    cover
-                                >
-                                </v-img>
-                                <v-card-title class="text-subtitle-1 font-weight-bold text-wrap">{{ items2[3].title }}</v-card-title>
-                            </v-card>
-                        </v-col>
-                        <v-col cols="6">
-                            <v-card
-                                :href="'/news/read?newsId=' + items2[2].id"
-                                class="align-end"
-                                link
-                                flat
-                                v-if="items2[2]"
-                            >
-                                <v-img
-                                    :src="'http://localhost:8080' + items2[2].imageUrl"
-                                    height="10rem"
-                                    cover
-                                >
-                                </v-img>
-                                <v-card-title class="text-subtitle-1 font-weight-bold text-wrap">{{ items2[2].title }}</v-card-title>
+                                <iframe
+                                :src="'https://www.youtube.com/embed/' + item.id.videoId"
+                                height="150rem"
+                                width="100%"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                                ></iframe>
+                                <v-card-title class="text-subtitle-1 font-weight-bold text-wrap">{{ item.snippet.title }}</v-card-title>
                             </v-card>
                         </v-col>
                     </v-row>
@@ -331,13 +277,27 @@ export default {
     data() {
         return {
             items2: null,
+            radio: null,
         };
     },
 
-    async beforeCreate() {
-        const response = await this.$axios.get('/news');
-        const data = await response.data;
-        this.items2 = data;
+    methods: {
+        async getNews() {
+            const response = await this.$axios.get('/news');
+            const data = await response.data;
+            this.items2 = data;
+        },
+
+        async getVideo() {
+            const response = await this.$axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&channelId=UCp4KPc8QxM7gSMS6kXeEGDg&maxResults=50&key=AIzaSyBbUNVdcf4N948dN96JOCYrDAXLw6UvXUE');
+            this.radio = response.data.items;
+            console.log(this.radio);
+        }
+    },
+
+    mounted() {
+        this.getNews();
+        this.getVideo();
     },
 };
 </script>

@@ -5,5 +5,5 @@
 
 <script setup>
     import NavBar from '@/components/NavBarLogin.vue';
-    import ForgotComp from '@/components/ForgotComp.vue';
+    import ForgotComp from '@/components/forgotComp.vue';
 </script>

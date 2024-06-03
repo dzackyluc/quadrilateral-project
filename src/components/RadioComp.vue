@@ -20,7 +20,7 @@
             <v-row v-if="response" class="justify-center">
                 <v-col cols="12" class="d-flex align-center justify-center ma-3 pa-3">
                     <iframe
-                    :src="'https://www.youtube.com/embed/' + response.videoId"
+                    :src="'https://www.youtube.com/embed/' + response[0].id.videoId"
                     height="511"
                     width="908"
                     frameborder="0"
@@ -30,12 +30,24 @@
                     ></iframe>
                 </v-col>
             </v-row>
+            <v-row v-else class="justify-center">
+                <v-col cols="12" class="d-flex align-center justify-center ma-3 pa-3">
+                    <v-skeleton-loader height="511" width="908" type="ossein"></v-skeleton-loader>
+                </v-col>
+            </v-row>
             <v-row v-if="response" class="justify-center">
                 <v-col cols="12" class="d-flex justify-center ma-3 pa-3">
                     <div class="video-text-container">
-                        <div class="sub-category">{{ response.subCategory }}</div>
-                        <h2 class="title">{{ response.title }}</h2>
-                        <div v-html="response.description" class="video-description"></div>
+                        <div class="sub-category">Radiolisa</div>
+                        <h2 class="title">{{ response[0].snippet.title }}</h2>
+                        <div class="video-description">{{ response[0].snippet.description }}</div>
+                    </div>
+                </v-col>
+            </v-row>
+            <v-row v-else class="justify-center">
+                <v-col cols="12" class="d-flex justify-center ma-3 pa-3">
+                    <div class="video-text-container">
+                        <v-skeleton-loader width="900" type="subtitle, list-item-three-line"></v-skeleton-loader>
                     </div>
                 </v-col>
             </v-row>
@@ -54,7 +66,7 @@
             </v-row>
 
             <!--streaming radiolisa sebelumnya-->
-            <v-row v-if="previousVideos.length" class="justify-center mt-4">
+            <v-row v-if="response" class="justify-center mt-4">
                 <v-col cols="10">
                      <!--judul streaming video-->
                     <v-row>
@@ -63,10 +75,10 @@
                             <h2 class="d-flex justify-center align-center">Streaming Sebelumnya</h2>
                         </v-col>
                     </v-row>
-                    <v-row v-for="(video, index) in previousVideos" :key="index" class="previous-video-container">
+                    <v-row v-for="(video, index) in previousVideosToShow" :key="index" class="previous-video-container">
                     <v-col cols="3" class="d-flex align-items-start position-relative">
                         <iframe
-                        :src="'https://www.youtube.com/embed/' + video.videoId"
+                        :src="'https://www.youtube.com/embed/' + video.id.videoId"
                         height="154"
                         width="241"
                         frameborder="0"
@@ -74,19 +86,19 @@
                         allowfullscreen
                         class="previous-video"
                         ></iframe>
-                        <div class="video-upload-time">{{ video.uploadTime }}</div>
+                        <div class="video-upload-time">{{ new Date(video.snippet.publishTime).toLocaleDateString() }}</div>
                     </v-col>
                     <v-col cols="9">
                         <div class="previous-video-details">
-                        <div class="sub-category">{{ video.subCategory }}</div>
-                        <h2 class="title">{{ video.title }}</h2>
-                        <div v-html="video.description" class="video-description truncated-description"></div>
+                        <div class="sub-category">Radiolisa</div>
+                        <h2 class="title">{{ video.snippet.title }}</h2>
+                        <div class="video-description truncated-description">{{ video.snippet.description }}</div>
                         </div>
                     </v-col>
                     </v-row>
                     <v-row>
                         <v-col cols="12" class="text-center button-lihat-lebih">
-                            <v-btn @click="showMoreVideos">Lihat Lebih Banyak</v-btn>
+                            <v-btn v-show="showMoreButton" @click="showMoreVideos">Lihat Lebih Banyak</v-btn>
                         </v-col>
                     </v-row>
                 </v-col>
@@ -103,71 +115,37 @@
                 { title: 'Home', disabled: false, href: '/dashboard' },
                 { title: 'Radio', disabled: true },
             ],
-            response: {
-                videoId: 'dQw4w9WgXcQ', // Ganti dengan ID video YouTube yang sesuai
-                subCategory: 'Radiolisa',
-                title: 'Judul Video',
-                description: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at nibh non ipsum tincidunt vulputate sit amet non dui. Sed vestibulum lorem nec nulla ultricies, vitae tincidunt lorem aliquet. Integer hendrerit libero a lorem tincidunt, quis commodo nulla dapibus. Morbi accumsan tristique justo, id fringilla mi.</p>',
-            },
-            previousVideos: [
-                {
-                    videoId: 'kxopViU98Xo', // ID video sebelumnya
-                    uploadTime: 'Diupload 2 jam yang lalu',
-                    subCategory: 'Radiolisa',
-                    title: 'Judul Video Sebelumnya 2',
-                    description: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at nibh non ipsum tincidunt vulputate sit amet non dui. Sed vestibulum lorem nec nulla ultricies, vitae tincidunt lorem aliquet. Integer hendrerit libero a lorem tincidunt, quis commodo nulla dapibus. Morbi accumsan tristique justo, id fringilla mi.</p>',
-                },
-                {
-                    videoId: 'kxopViU98Xo', // ID video sebelumnya
-                    uploadTime: 'Diupload 2 jam yang lalu',
-                    subCategory: 'Radiolisa',
-                    title: 'Judul Video Sebelumnya 2',
-                    description: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at nibh non ipsum tincidunt vulputate sit amet non dui. Sed vestibulum lorem nec nulla ultricies, vitae tincidunt lorem aliquet. Integer hendrerit libero a lorem tincidunt, quis commodo nulla dapibus. Morbi accumsan tristique justo, id fringilla mi.</p>',
-                },
-                {
-                    videoId: 'kxopViU98Xo', // ID video sebelumnya
-                    uploadTime: 'Diupload 3 jam yang lalu',
-                    subCategory: 'Streaming Radiolisa',
-                    title: 'Judul Video Sebelumnya 3',
-                    description: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at nibh non ipsum tincidunt vulputate sit amet non dui. Sed vestibulum lorem nec nulla ultricies, vitae tincidunt lorem aliquet. Integer hendrerit libero a lorem tincidunt, quis commodo nulla dapibus. Morbi accumsan tristique justo, id fringilla mi.</p>',
-                },
-                {
-                    videoId: 'kxopViU98Xo', // ID video sebelumnya
-                    uploadTime: 'Diupload 4 jam yang lalu',
-                    subCategory: 'Streaming Radiolisa',
-                    title: 'Judul Video Sebelumnya 4',
-                    description: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at nibh non ipsum tincidunt vulputate sit amet non dui. Sed vestibulum lorem nec nulla ultricies, vitae tincidunt lorem aliquet. Integer hendrerit libero a lorem tincidunt, quis commodo nulla dapibus. Morbi accumsan tristique justo, id fringilla mi.</p>',
-                },
-                {
-                    videoId: 'kxopViU98Xo', // ID video sebelumnya
-                    uploadTime: 'Diupload 4 jam yang lalu',
-                    subCategory: 'Streaming Radiolisa',
-                    title: 'Judul Video Sebelumnya 4',
-                    description: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at nibh non ipsum tincidunt vulputate sit amet non dui. Sed vestibulum lorem nec nulla ultricies, vitae tincidunt lorem aliquet. Integer hendrerit libero a lorem tincidunt, quis commodo nulla dapibus. Morbi accumsan tristique justo, id fringilla mi.</p>',
-                },
-            ],
+            response: null, // Menyimpan data video yang diambil dari API
             previousVideosToShow: [], // Menyimpan streaming video yang akan ditampilkan
             showMoreButton: true // Menampilkan tombol "Lihat Lebih Banyak" atau tidak
         };
     },
-    mounted() {
-        this.previousVideosToShow = this.previousVideos.slice(0, 3);
-        if (this.previousVideos.length <= 3) {
-        this.showMoreButton = false;
-        }
+    beforeMount() {
+        this.getVideo();
     },
     methods: {
         showMoreVideos() {
-        this.previousVideosToShow = [...this.previousVideosToShow, ...this.previousVideos.slice(this.previousVideosToShow.length, this.previousVideosToShow.length + 6)];
-        if (this.previousVideosToShow.length >= this.previousVideos.length) {
-            this.showMoreButton = false;
-        }
+            this.previousVideosToShow = [...this.previousVideosToShow, ...this.response.slice(this.previousVideosToShow.length, this.previousVideosToShow.length + 6)];
+            if (this.previousVideosToShow.length >= this.response.length - 1) {
+                this.showMoreButton = false;
+            }
+        },
+
+        async getVideo() {
+            const response = await this.$axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&channelId=UCp4KPc8QxM7gSMS6kXeEGDg&maxResults=50&key=AIzaSyBbUNVdcf4N948dN96JOCYrDAXLw6UvXUE');
+            this.response = response.data.items;
+            if (this.response) {
+                this.previousVideosToShow = this.response.slice(1, 4);
+                if (this.response.length <= 3) {
+                    this.showMoreButton = false;
+                }
+            }
         }
     }
   }
 </script>
 
-<style>
+<style scoped>
     .video-embed {
     /* padding: 2px; */
     margin: 0 auto; /* Center the iframe */
